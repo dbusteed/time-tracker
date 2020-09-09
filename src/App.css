@@ -4,7 +4,7 @@
 *
 */
 body {
-  background-color: rgb(48, 48, 48);
+  background-color: rgb(38, 38, 38);
   color: rgb(197, 197, 197);
   font-family: Roboto;
   height: 100%;
@@ -55,7 +55,7 @@ body {
 */
 .timer-container {
   border-radius: .5rem;
-  background-color: rgb(28, 28, 28);
+  background-color: rgb(18, 18, 18);
   padding: 2rem 2rem 1rem 2rem;
   margin: 1rem;
   display: flex;

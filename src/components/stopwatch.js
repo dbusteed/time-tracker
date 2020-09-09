@@ -6,16 +6,26 @@ import { Button } from '@material-ui/core'
 function Stopwatch(props) {
   
   const [isRunning, setRunning] = useState(false)
+  const [start, setStart] = useState(0)
   const [seconds, setSeconds] = useState(0)
+  const [hold, setHold] = useState(0)
   const [title, setTitle] = useState(`Timer #${props.number}`)
   const inputRef = useRef()
 
   const toggle = () => {
-    setRunning(!isRunning)
+    if(isRunning) {
+      setHold(seconds)
+      setRunning(false)
+    } else {
+      setStart(Date.now())
+      setRunning(true)
+    }
   }
 
   const reset = () => {
+    setStart(0)
     setSeconds(0)
+    setHold(0)
     setRunning(false)
   }
 
@@ -23,13 +33,15 @@ function Stopwatch(props) {
     let interval = null
     if (isRunning) {
       interval = setInterval(() => {
-        setSeconds(s => s + 1)
+        setSeconds(
+          ((Date.now() - start) / 1000) + hold
+        )
       }, 1000)
     } else if (!isRunning && seconds !== 0) {
       clearInterval(interval)
     }
     return () => clearInterval(interval)
-  }, [isRunning, seconds])
+  }, [isRunning, seconds, start, hold])
 
   const mainButtonText = () => {
     if(isRunning) {
